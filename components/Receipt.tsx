@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Item, Person } from "@/app/page";
-import Dropdown from "./Dropdown";
+import Dropdown from "@/components/Dropdown";
 import { calculateSharedPrice, convertToCurrency } from "@/utils/calculations";
-import currency from "currency.js";
 
 interface ReceiptProps {
   receiptText: string | null;
