@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import Upload from "@/components/Upload";
 import People from "@/components/People";
-// @ts-ignore
-import { Checkmark } from "react-checkmark";
+import AnimatedCheckmark from "@/components/AnimatedCheckmark";
 
 export interface Item {
   name: string;
@@ -68,7 +67,7 @@ export default function Home() {
               </button>
             ) : (
               <div className="ml-2">
-                <Checkmark />
+                <AnimatedCheckmark />
               </div>
             )}
           </div>
