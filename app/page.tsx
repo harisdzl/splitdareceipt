@@ -1,11 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "@/components/Modal";
 import { Navbar } from "@/components/Navbar";
 import Upload from "@/components/Upload";
 import People from "@/components/People";
-// @ts-ignore
-import { Checkmark } from "react-checkmark";
+import Information from "@/components/Information";
 
 export interface Item {
   name: string;
@@ -24,58 +22,20 @@ export interface Person {
 export default function Home() {
   const [people, setPeople] = useState<string[]>([]);
   const [items, setItems] = useState<Item[]>([]);
+  const [tax, setTax] = useState(0);
+  const [serviceCharge, setServiceCharge] = useState(0);
   const [person, setPerson] = useState<Person[]>([]);
-  const [namesConfirmed, setNamesConfirmed] = useState(false);
-
-  const handleNames = (peopleStr: string) => {
-    const peopleArr = peopleStr.split(",");
-    const result = [];
-    for (var person of peopleArr) {
-      result.push(person.trim());
-    }
-    return result;
-  };
-
-  const handleConfirm = () => {
-    setNamesConfirmed(true);
-  };
+  const [infoConfirmed, setInfoConfirmed] = useState<boolean>(false);
 
   return (
-    <div className="">
+    <div className="p-4">
+      <Information
+        setPeople={setPeople}
+        setServiceCharge={setServiceCharge}
+        setTax={setTax}
+      />
       <div className="flex flex-col p-4 gap-y-4">
-        <div className="">
-          <label
-            htmlFor="caption"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            People involved:
-          </label>
-          <div className="flex">
-            <input
-              type="text"
-              id="people"
-              name="people"
-              className="shadow appearance-none border rounded-l w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="e.g Adam, Bob, Wei Jie"
-              required
-              onChange={(e) => setPeople(handleNames(e.target.value))}
-              disabled={namesConfirmed === true ? true : false}
-            />
-            {!namesConfirmed ? (
-              <button
-                onClick={handleConfirm}
-                className="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-r border-gray-400 hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-              >
-                Confirm
-              </button>
-            ) : (
-              <div className="ml-2">
-                <Checkmark />
-              </div>
-            )}
-          </div>
-        </div>
-        {namesConfirmed && (
+        {infoConfirmed && (
           <div>
             <Upload people={people} setItems={setItems} setPerson={setPerson} />
             <People people={person} />
