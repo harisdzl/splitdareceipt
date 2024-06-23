@@ -25,7 +25,7 @@ export default function Home() {
   const [tax, setTax] = useState(0);
   const [serviceCharge, setServiceCharge] = useState(0);
   const [person, setPerson] = useState<Person[]>([]);
-  const [infoConfirmed, setInfoConfirmed] = useState<boolean>(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   return (
     <div className="p-4">
@@ -33,11 +33,19 @@ export default function Home() {
         setPeople={setPeople}
         setServiceCharge={setServiceCharge}
         setTax={setTax}
+        setConfirmed={setConfirmed}
+        confirmed={confirmed}
       />
-      <div className="flex flex-col p-4 gap-y-4">
-        {infoConfirmed && (
+      <div className="flex flex-col pt-4">
+        {confirmed && (
           <div>
-            <Upload people={people} setItems={setItems} setPerson={setPerson} />
+            <Upload
+              people={people}
+              setItems={setItems}
+              setPerson={setPerson}
+              tax={tax}
+              serviceCharge={serviceCharge}
+            />
             <People people={person} />
           </div>
         )}

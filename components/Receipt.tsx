@@ -8,6 +8,8 @@ interface ReceiptProps {
   people: string[];
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
   setPerson: React.Dispatch<React.SetStateAction<Person[]>>;
+  tax: number;
+  serviceCharge: number;
 }
 
 const Receipt = ({
@@ -15,6 +17,8 @@ const Receipt = ({
   people,
   setItems,
   setPerson,
+  tax,
+  serviceCharge,
 }: ReceiptProps) => {
   const [items, setLocalItems] = useState<Item[]>([]);
   const [localPeople, setLocalPeople] = useState<Person[]>([]);
@@ -60,7 +64,9 @@ const Receipt = ({
     item.sharedPrice = calculateSharedPrice(
       item.price,
       item.quantity,
-      newPeople.length
+      newPeople.length,
+      tax,
+      serviceCharge
     );
 
     // Reset all totals to recalculate them
@@ -109,6 +115,9 @@ const Receipt = ({
     0
   );
 
+  const totalAfterTax = total * (1 + tax / 100);
+  const totalAfterServiceCharge = totalAfterTax * (1 + serviceCharge / 100);
+
   return (
     <div className="border border-gray-500 rounded-lg w-full h-auto py-2 px-3">
       <table className="bg-white table-fixed content-center w-full text-center text-xs sm:text-base">
@@ -144,13 +153,35 @@ const Receipt = ({
           ))}
           <tr>
             <td className="py-2 px-4 border-b">-</td>
-            <td className="py-2 px-4 border-b">Total</td>
+            <td className="text-left py-2 px-4 border-b">Total</td>
             <td className="py-2 px-4 border-b">
               ${convertToCurrency(total.toString())}
             </td>
             <td className="py-2 px-4 border-b">-</td>
             <td className="py-2 px-4 border-b">-</td>
           </tr>
+          {tax > 0 && (
+            <tr>
+              <td className="py-2 px-4 border-b">-</td>
+              <td className="text-left py-2 px-4 border-b">Total After Tax:</td>
+              <td className="py-2 px-4 border-b">
+                ${convertToCurrency(totalAfterTax.toString())}
+              </td>
+              <td className="py-2 px-4 border-b">-</td>
+              <td className="py-2 px-4 border-b">-</td>
+            </tr>
+          )}
+          {tax > 0 && serviceCharge > 0 && (
+            <tr>
+              <td className="py-2 px-4 border-b">-</td>
+              <td className="text-left py-2 px-4 border-b">Total After Tax:</td>
+              <td className="py-2 px-4 border-b">
+                ${convertToCurrency(totalAfterServiceCharge.toString())}
+              </td>
+              <td className="py-2 px-4 border-b">-</td>
+              <td className="py-2 px-4 border-b">-</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

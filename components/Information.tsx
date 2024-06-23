@@ -6,15 +6,17 @@ interface InformationProps {
   setPeople: React.Dispatch<React.SetStateAction<string[]>>;
   setTax: React.Dispatch<React.SetStateAction<number>>;
   setServiceCharge: React.Dispatch<React.SetStateAction<number>>;
+  setConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
+  confirmed: boolean;
 }
 
 const Information = ({
   setPeople,
   setTax,
   setServiceCharge,
+  setConfirmed,
+  confirmed,
 }: InformationProps) => {
-  const [confirmed, setConfirmed] = useState(false);
-
   const handleNames = (peopleStr: string) => {
     const peopleArr = peopleStr.split(",");
     const result = [];
@@ -74,7 +76,7 @@ const Information = ({
             htmlFor="caption"
             className="block text-gray-700 font-bold mb-2"
           >
-            Service Charge:
+            Service Tax:
           </label>
           <div>
             <input
@@ -100,7 +102,7 @@ const Information = ({
                 Confirm
               </button>
             ) : (
-              <div className="ml-2">
+              <div className="">
                 <AnimatedCheckmark />
               </div>
             )}
