@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-// @ts-ignore
-import { Checkmark } from "react-checkmark";
+import AnimatedCheckmark from "./AnimatedCheckmark";
 
 interface InformationProps {
   setPeople: React.Dispatch<React.SetStateAction<string[]>>;
@@ -102,7 +101,7 @@ const Information = ({
               </button>
             ) : (
               <div className="ml-2">
-                <Checkmark />
+                <AnimatedCheckmark />
               </div>
             )}
           </div>
