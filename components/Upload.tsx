@@ -1,8 +1,6 @@
 "use client";
 import { imageToText, toBase64 } from "@/utils/image";
 import React, { useState } from "react";
-// @ts-ignore
-import { Checkmark } from "react-checkmark";
 import Receipt from "./Receipt";
 import { Item, Person } from "@/app/page";
 interface UploadProps {

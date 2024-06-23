@@ -1,4 +1,4 @@
-import { Item, Person } from "@/app/page";
+import { Person } from "@/app/page";
 import { convertToCurrency } from "@/utils/calculations";
 import React from "react";
 interface PeopleProps {

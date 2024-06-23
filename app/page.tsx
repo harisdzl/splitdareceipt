@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "@/components/Modal";
-import { Navbar } from "@/components/Navbar";
 import Upload from "@/components/Upload";
 import People from "@/components/People";
 // @ts-ignore
