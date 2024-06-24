@@ -7,6 +7,8 @@ interface UploadProps {
   people: string[];
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
   setPerson: React.Dispatch<React.SetStateAction<Person[]>>;
+  tax: number;
+  serviceCharge: number;
 }
 
 const tempItems = `{
@@ -74,7 +76,13 @@ const tempItems = `{
   ]
 }`;
 
-const Upload = ({ people, setItems, setPerson }: UploadProps) => {
+const Upload = ({
+  people,
+  setItems,
+  setPerson,
+  tax,
+  serviceCharge,
+}: UploadProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [uploaded, setUploaded] = useState<boolean>(false);
   const [receipt, setReceipt] = useState<string | null>("");
@@ -89,9 +97,9 @@ const Upload = ({ people, setItems, setPerson }: UploadProps) => {
     if (file) {
       const base64File = (await toBase64(file)) as string;
       setImage(base64File); // Save the base64 image string
-      const text = await imageToText(base64File);
-      console.log("Extracted text:", text);
-      setReceipt(text);
+      // const text = await imageToText(base64File);
+      // console.log("Extracted text:", text);
+      setReceipt(tempItems);
     }
     setLoading(false);
   };
@@ -156,6 +164,8 @@ const Upload = ({ people, setItems, setPerson }: UploadProps) => {
                           people={people}
                           setItems={setItems}
                           setPerson={setPerson}
+                          tax={tax}
+                          serviceCharge={serviceCharge}
                         />
                       )}
                     </div>
