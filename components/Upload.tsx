@@ -97,7 +97,7 @@ const Upload = ({
     if (file) {
       const base64File = (await toBase64(file)) as string;
       setImage(base64File); // Save the base64 image string
-      // const text = await imageToText(base64File);
+      const text = await imageToText(base64File);
       // console.log("Extracted text:", text);
       setReceipt(tempItems);
     }
