@@ -174,7 +174,9 @@ const Receipt = ({
           {tax > 0 && serviceCharge > 0 && (
             <tr>
               <td className="py-2 px-4 border-b">-</td>
-              <td className="text-left py-2 px-4 border-b">Total After Tax:</td>
+              <td className="text-left py-2 px-4 border-b">
+                Total After Service Charge:
+              </td>
               <td className="py-2 px-4 border-b">
                 ${convertToCurrency(totalAfterServiceCharge.toString())}
               </td>
