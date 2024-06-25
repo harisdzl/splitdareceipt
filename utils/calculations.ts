@@ -11,8 +11,9 @@ export const calculateSharedPrice = (
   if (totalPeopleShared === 0) {
     return 0;
   }
-  const unitPriceAftTax = unitPrice * (1 + tax / 100);
-  const unitPriceAftServiceCharge = unitPriceAftTax * (1 + serviceCharge / 100);
+  const unitPriceAftTax = unitPrice * ((1 + tax) / 100);
+  const unitPriceAftServiceCharge =
+    unitPriceAftTax * ((1 + serviceCharge) / 100);
   return (unitPriceAftServiceCharge * quantity) / totalPeopleShared;
 };
 
